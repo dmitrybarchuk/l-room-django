@@ -1,0 +1,47 @@
+{% load thumbnail %}
+
+<div class="slider">
+    <div id="carouselIndicators" class="carousel slide row">
+        <div class="col col-12 col-lg-9">
+            <div class="carousel-inner">
+                {% for category in categories %}
+                    {% if category.show_in_slider %}
+                        <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                            {% thumbnail category.main_image "850x400" crop="center" as im %}
+                                <a href="{% url 'category' category.slug %}">
+                                    <img src="{{ im.url }}" class="img-fluid">
+                                </a>
+                            {% endthumbnail %}
+                            <p class="carousel-caption">{{ category.title }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Пред</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">След</span>
+                </a>
+            </div>
+        </div>
+        <div class="slider-pointers col col-12 hidden-md-down col-md-3">
+            <div class="row">
+                {% for category in categories %}
+                    {% if category.show_in_slider %}
+                        <div class="col-md-6">
+                            {% thumbnail category.main_image "150x150" crop="center" as im %}
+                                <img src="{{ im.url }}" data-target="#carouselIndicators"
+                                     data-slide-to="{{ forloop.counter0 }}" class="img-fluid{% if forloop.first %}
+                                      active{% endif %}">
+                            {% endthumbnail %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>

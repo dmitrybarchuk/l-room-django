@@ -1,0 +1,22 @@
+@import "variables";
+
+.index-page {
+  .carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    .carousel-indicators {
+      display: block;
+      position: initial;
+    }
+  }
+
+  .page {
+    padding-bottom: 0;
+
+    .cat {
+      margin-bottom: 1rem;
+    }
+  }
+}

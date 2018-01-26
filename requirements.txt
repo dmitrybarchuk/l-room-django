@@ -1,0 +1,6 @@
+django==1.11.5
+sorl-thumbnail==12.3
+Pillow==4.0.0
+pytz==2016.10
+django-ckeditor==5.4.0
+

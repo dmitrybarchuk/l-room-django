@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static thumbnail %}
+
+{% block page_class %}index-page{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for category in categories %}
+            <div class="col col-12 col-sm-6 col-md-4 cat">
+                <a href="{% url 'category' category.slug %}">
+                    {% thumbnail category.main_image "600x450" crop="center" as im %}
+                        <a href="{% url 'category' category.slug %}">
+                            <img src="{{ im.url }}" class="img-fluid">
+                        </a>
+                    {% endthumbnail %}
+                    <p class="caption">
+                        <a href="{% url 'category' category.slug %}" class="link">
+                            {{ category.title }}
+                        </a>
+                    </p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block slider %}
+    {% include 'slider.html' %}
+{% endblock %}
+
+{% block post_style %}
+{% endblock %}
+
+{% block post_script %}
+    <script>
+
+        $('.slider').on('slide.bs.carousel', function () {
+            $('.carousel-item img').css({'height': $('.carousel-inner').height() + 'px'});
+        })
+
+    </script>
+{% endblock %}

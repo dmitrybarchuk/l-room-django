@@ -1,0 +1,100 @@
+{% load static %}
+
+{% load flatpages get_categories %}
+{% get_flatpages as flatpages %}
+{% get_categories as categories %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}LIVING ROOM{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% include 'favicons.html' %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/jquery-slim.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body class="{% block page_class %}{% endblock %}">
+    <header>
+        <div class="container">
+            {% include 'menu.html' %}
+        </div>
+    </header>
+
+    <div class="container">
+        <main>
+            {% block slider %}
+
+            {% endblock %}
+
+            <div class="page">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <div class="container">
+        <footer>
+            <div class="row">
+                <div class="col col-12 col-sm-6 col-lg-4">
+                    <h3>Категории</h3>
+
+                    <ul class="nav flex-column">
+                        {% for category in categories %}
+                            <li class="nav-item">
+                                <a href="{% url 'category' category.slug %}" class="nav-link">
+                                    {{ category }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="col col-12 col-sm-6 col-lg-3">
+                    <h3>Меню</h3>
+                    <ul class="nav flex-column">
+                        {% for page in flatpages|dictsort:'pk' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ page.url }}">
+                                    {{ page.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="col col-12 col-lg-5">
+                    <h3>Написать письмо</h3>
+                    <form action="{% url 'email_message' %}" method="post" class="email-message">
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Введите ваш email " required>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea name="message" id="message" cols="30" rows="10" class="form-control"
+                                      required placeholder="Введите ваше сообщение"></textarea>
+                        </div>
+                        {% csrf_token %}
+                        <button class="btn btn-outline-dark float-right">Отправить</button>
+                        <input type="hidden" name="name" id="name">
+                    </form>
+                </div>
+            </div>
+
+            <div class="copyright">
+                LIVING ROOM &copy; 2011&ndash;{% now 'Y' %}
+            </div>
+        </footer>
+    </div>
+
+    {% block post_style %}{% endblock %}
+    {% block post_script %}{% endblock %}
+</body>
+</html>
