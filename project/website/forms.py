@@ -20,4 +20,7 @@ class EmailMessageForm(forms.Form):
 
     def send_email(self):
 
-        send_mail(u'Сообщение с сайта LIVING ROOM', self.data['message'], settings.MAIL_SENDER, [settings.RECIPIENT])
+        send_mail(u'Сообщение с сайта LIVING ROOM',
+                  u'От %s\n %s' % (self.data['email'], self.data['message']),
+                  settings.MAIL_SENDER,
+                  [settings.RECIPIENT])

@@ -3,3 +3,4 @@ env/
 *.sqlite3
 .idea/
 .DS_Store
+local_settings.py

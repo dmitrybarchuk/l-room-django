@@ -29,8 +29,8 @@ class EmailMessage(FormView):
 
     def form_valid(self, form):
         form.send_email()
-        messages.add_messsage(self.request, messages.SUCCESS, u'Ваше сообщение отправлено')
+        messages.add_message(self.request, messages.SUCCESS, u'Ваше сообщение отправлено')
         return super(EmailMessage, self).form_valid(form)
 
     def get_success_url(self):
-        return redirect(self.request.META.get('HTTP_REFERER', '/'))
+        return self.request.META.get('HTTP_REFERER', '/')
