@@ -147,3 +147,8 @@ EMAIL_USE_SSL = True
 # CKEditor settings
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
