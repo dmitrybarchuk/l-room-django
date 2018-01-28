@@ -135,15 +135,6 @@ THUMBNAIL_DEBUG = True
 # SITE ID
 SITE_ID = 1
 
-# SMTP Settings
-EMAIL_SERVER = 'smtp.gmail.com'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USERNAME = 'smtp.living.room@gmail.com'
-EMAIL_HOST_PASSWORD = '!livingroom!'
-MAIL_SENDER = 'smtp.living.room@gmail.com'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-
 # CKEditor settings
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
