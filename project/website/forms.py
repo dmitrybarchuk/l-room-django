@@ -20,5 +20,4 @@ class EmailMessageForm(forms.Form):
 
     def send_email(self):
 
-        send_mail(u'Сообщение с сайта LIVING ROOM', self.data['message'], settings.EMAIL_HOST_USERNAME,
-                  [self.data['email']])
+        send_mail(u'Сообщение с сайта LIVING ROOM', self.data['message'], settings.MAIL_SENDER, [settings.RECIPIENT])
