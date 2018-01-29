@@ -1,9 +1,0 @@
-# SMTP Settings
-EMAIL_SERVER = 'smtp.gmail.com'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USERNAME = 'smtp.living.room@gmail.com'
-EMAIL_HOST_PASSWORD = '!livingroom!'
-MAIL_SENDER = 'smtp.living.room@gmail.com'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-RECIPIENT = 'dmitry.barchuk@gmail.com'
