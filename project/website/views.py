@@ -6,22 +6,32 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.urls import reverse
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView
 
 from project import settings
 from website.forms import EmailMessageForm
-from website.models import Category
+from website.models import Category, ImageCategory
 
 
-def category(request, cat=None):
-    template = 'index.html'
-    context = {}
+class CategoryList(ListView):
+    model = ImageCategory
+    paginate_by = 12
 
-    if cat:
-        template = 'category.html'
-        context['cat'] = get_object_or_404(Category, slug=cat)
+    def get_template_names(self):
+        return 'category.html' if self.kwargs.get('cat', None) else 'index.html'
 
-    return render(request, template, context)
+    def get_queryset(self):
+        q = super(CategoryList, self).get_queryset()
+        return q.filter(images__slug=self.kwargs.get('cat', None))
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryList, self).get_context_data(**kwargs)
+        try:
+            category_obj = Category.objects.get(slug=self.kwargs.get('cat', None))
+            context['cat'] = category_obj
+        except Category.DoesNotExist:
+            pass
+        return context
 
 
 class EmailMessage(FormView):

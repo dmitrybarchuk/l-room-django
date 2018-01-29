@@ -1,7 +1,56 @@
+@import "variables";
+
 .category-page {
   .page {
     .image-item {
       margin-bottom: 1.5rem;
+
+      a {
+        min-height: 185px;
+        min-width: 250px;
+      }
+    }
+  }
+
+  .pagination {
+    border-radius: 0;
+
+    .page-item {
+      color: $bg;
+      border-radius: 0;
+      padding: 0 10px;
+
+      .page-link {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 10px 15px;
+        color: $bg;
+      }
+
+      &:first-child,
+      &:last-child {
+
+        .page-link {
+          border-radius: 0;
+        }
+      }
+
+      &.active {
+        color: white;
+
+        .page-link {
+          color: white;
+          background-color: $bg;
+          border-color: darken($bg, 15%);
+        }
+      }
+
+      &.disabled {
+        .page-link {
+          color: lighten($bg, 25%);
+          text-shadow: 0 0 2px $bg;
+        }
+      }
     }
   }
 }

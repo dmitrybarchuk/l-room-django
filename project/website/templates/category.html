@@ -12,17 +12,41 @@
     </div>
 
     <div class="row">
-        {% with cat.imagecategory_set.all as gallery %}
-            {% for item in gallery %}
-                <div class="image-item col col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div style="background: url({{ item.get_base64_blurred_preview }}) no-repeat; background-size: contain; min-height: 185px; min-width: 250px;">
-                        {% thumbnail item.image "400x300" crop="center" as im %}
-                            <a href="{{ item.image.url }}" data-lightbox="{{ cat.title }}"><img src="{{ im.url }}" class="img-fluid"></a>
-                        {% endthumbnail %}
-                    </div>
-                </div>
-            {% endfor %}
-        {% endwith %}
+        {% for item in object_list %}
+            <div class="image-item col col-12 col-sm-6 col-md-4 col-lg-3">
+                {% thumbnail item.image "400x300" crop="center" as im %}
+                    <a style="background: url({{ item.get_base64_blurred_preview }}) no-repeat; background-size: contain; min-height: 185px; min-width: 250px;" href="{{ item.image.url }}" data-lightbox="{{ cat.title }}"><img src="{{ im.url }}" class="img-fluid"></a>
+                {% endthumbnail %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col col-12">
+            <nav aria-label="navigation">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&larr; туда</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">&larr; туда</a></li>
+                    {% endif %}
+
+                    {% for i in paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">сюда &rarr;</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">сюда &rarr; </a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
     </div>
 {% endblock %}
 

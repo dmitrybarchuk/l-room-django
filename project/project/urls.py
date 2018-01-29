@@ -13,22 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from sys import path
-
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
 from project import settings
 from website import views
-from website.views import EmailMessage
+from website.views import EmailMessage, CategoryList
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^$', views.category, name='category'),
+    url(r'^$', CategoryList.as_view(), name='category'),
+    url(r'^(?P<cat>[\w\d-]+)/$', CategoryList.as_view(), name='category'),
+    # url(r'^$', views.category, name='category'),
     url(r'^email-message/$', EmailMessage.as_view(), name='email_message'),
-    url(r'^(?P<cat>[\w\d-]+)/$', views.category, name='category'),
+    # url(r'^(?P<cat>[\w\d-]+)/$', views.category, name='category'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

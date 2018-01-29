@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin-ext");
 @import url("https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin-ext");
+@import url("https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin-ext");
 body {
   background: #5e5552;
   padding-top: 2rem;
@@ -127,6 +128,31 @@ body {
 
 .category-page .page .image-item {
   margin-bottom: 1.5rem; }
+  .category-page .page .image-item a {
+    min-height: 185px;
+    min-width: 250px; }
+.category-page .pagination {
+  border-radius: 0; }
+  .category-page .pagination .page-item {
+    color: #5e5552;
+    border-radius: 0;
+    padding: 0 10px; }
+    .category-page .pagination .page-item .page-link {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 10px 15px;
+      color: #5e5552; }
+    .category-page .pagination .page-item:first-child .page-link, .category-page .pagination .page-item:last-child .page-link {
+      border-radius: 0; }
+    .category-page .pagination .page-item.active {
+      color: white; }
+      .category-page .pagination .page-item.active .page-link {
+        color: white;
+        background-color: #5e5552;
+        border-color: #35302e; }
+    .category-page .pagination .page-item.disabled .page-link {
+      color: #9f9491;
+      text-shadow: 0 0 2px #5e5552; }
 
 .flat-page .img-left {
   margin-right: 15px; }
