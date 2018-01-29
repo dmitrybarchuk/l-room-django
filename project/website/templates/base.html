@@ -13,11 +13,6 @@
     {% include 'favicons.html' %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="{% static 'js/jquery-slim.min.js' %}"></script>
-    <script src="{% static 'js/jquery.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
 </head>
 <body class="{% block page_class %}{% endblock %}">
     {% include 'messages.html' %}
@@ -94,7 +89,11 @@
             </div>
         </footer>
     </div>
-
+    <script src="{% static 'js/jquery-slim.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     {% block post_style %}{% endblock %}
     {% block post_script %}{% endblock %}
 </body>
