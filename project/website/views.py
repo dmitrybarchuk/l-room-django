@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
@@ -22,7 +23,14 @@ class CategoryList(ListView):
 
     def get_queryset(self):
         q = super(CategoryList, self).get_queryset()
-        return q.filter(images__slug=self.kwargs.get('cat', None))
+        if 'cat' in self.kwargs:
+            try:
+                Category.objects.get(slug=self.kwargs['cat'])
+                return q.filter(images__slug=self.kwargs['cat'])
+            except Category.DoesNotExist:
+                raise Http404(u'Категория не найдена')
+        else:
+            return q
 
     def get_context_data(self, **kwargs):
         context = super(CategoryList, self).get_context_data(**kwargs)
